@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./prismaClient"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Preferences {
+  id                 String   @id @default(uuid())
+  emailUpdates       Boolean  @default(true)
+  theme              String   @default("dark")
+  bookmarksSortOrder String   @default("recent")
+  notesDisplay       String   @default("canvas")
+  userId             String   @unique
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model BookmarksSections {
+  id        String      @id @default(uuid())
+  name      String
+  bookmarks Bookmarks[]
+  userId    String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Bookmarks {
+  id          String           @id @default(uuid())
+  title       String
+  url         String
+  description String?
+  sectionId   String
+  section     BookmarksSections @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  userId      String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model StickyNotes {
+  id        String   @id @default(uuid())
+  title     String?
+  content   String?
+  color     String?
+  pinned    Boolean  @default(false)
+  archived  Boolean  @default(false)
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ToDoLists {
+  id        String     @id @default(uuid())
+  title     String
+  items     ToDoItems[]
+  userId    String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model ToDoItems {
+  id        String    @id @default(uuid())
+  content   String
+  completed Boolean   @default(false)
+  listId    String
+  list      ToDoLists @relation(fields: [listId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
