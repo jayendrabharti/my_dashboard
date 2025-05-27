@@ -1,29 +1,18 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { createBrowserClient } from "@supabase/ssr";
 import { LoaderCircleIcon } from "lucide-react";
+import { useSession } from "@/providers/SessionProvider";
 
 export default function AuthCallback() {
-  const router = useRouter();
-
+  const { refreshSession } = useSession();
   useEffect(() => {
     const checkSession = async () => {
-      const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-      );
-      const { data } = await supabase.auth.getSession();
-      if (data.session) {
-        router.replace("/bookmarks");
-      } else {
-        router.replace("/unauthorized");
-      }
+      await refreshSession();
     };
 
     checkSession();
-  }, [router]);
+  }, [refreshSession]);
 
   return (
     <div className="w-full h-full flex items-center justify-center flex-col gap-4">

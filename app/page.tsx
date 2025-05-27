@@ -1,6 +1,8 @@
-import { redirect } from "next/navigation";
-
 export default function Home() {
-  redirect("/bookmarks");
-  return null;
+  return (
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
+    </div>
+  );
 }
