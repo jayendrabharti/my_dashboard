@@ -8,6 +8,7 @@ import {
 } from "react";
 import { createSupabaseClient } from "@/supabase/client";
 import { Session } from "@supabase/supabase-js";
+import { getUser } from "@/supabase/server";
 
 type SessionContextType = {
   session: Session | null;
@@ -30,6 +31,7 @@ export function SessionProvider({
 
   const refreshSession = useCallback(async () => {
     try {
+      getUser(); // Ensure the user is fetched from the server
       setError(null);
       const { data, error: sessionError } = await supabase.auth.getSession();
 
