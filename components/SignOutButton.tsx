@@ -1,10 +1,10 @@
 "use client";
-import { signOutAction } from "@/actions/auth";
 import { Loader2Icon, LogOutIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTransition } from "react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
+import { createSupabaseClient } from "@/supabase/client";
 
 export default function SignOutButton({
   className = "",
@@ -13,11 +13,12 @@ export default function SignOutButton({
 }) {
   const router = useRouter();
   const [signingOut, startSignOut] = useTransition();
+  const supabase = createSupabaseClient();
   return (
     <Button
       onClick={() => {
         startSignOut(async () => {
-          await signOutAction();
+          await supabase.auth.signOut();
           router.refresh();
         });
       }}

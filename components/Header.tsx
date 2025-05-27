@@ -10,13 +10,26 @@ import { createSupabaseClient } from "@/supabase/client";
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
 
-  const { auth } = createSupabaseClient();
+  const supabase = createSupabaseClient();
 
   useEffect(() => {
-    auth.onAuthStateChange((event, session) => {
+    const getSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setUser(session?.user || null);
-    });
-  });
+    };
+
+    getSession();
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user || null);
+      }
+    );
+
+    return () => listener.subscription.unsubscribe();
+  }, [supabase.auth]);
 
   return (
     <div className="p-2 flex flex-row items-center justify-between gap-2 bg-sidebar">
