@@ -4592,8 +4592,20 @@ export namespace Prisma {
 
   export type AggregateStickyNotes = {
     _count: StickyNotesCountAggregateOutputType | null
+    _avg: StickyNotesAvgAggregateOutputType | null
+    _sum: StickyNotesSumAggregateOutputType | null
     _min: StickyNotesMinAggregateOutputType | null
     _max: StickyNotesMaxAggregateOutputType | null
+  }
+
+  export type StickyNotesAvgAggregateOutputType = {
+    x: number | null
+    y: number | null
+  }
+
+  export type StickyNotesSumAggregateOutputType = {
+    x: number | null
+    y: number | null
   }
 
   export type StickyNotesMinAggregateOutputType = {
@@ -4601,6 +4613,8 @@ export namespace Prisma {
     title: string | null
     content: string | null
     color: string | null
+    x: number | null
+    y: number | null
     pinned: boolean | null
     archived: boolean | null
     userId: string | null
@@ -4613,6 +4627,8 @@ export namespace Prisma {
     title: string | null
     content: string | null
     color: string | null
+    x: number | null
+    y: number | null
     pinned: boolean | null
     archived: boolean | null
     userId: string | null
@@ -4625,6 +4641,8 @@ export namespace Prisma {
     title: number
     content: number
     color: number
+    x: number
+    y: number
     pinned: number
     archived: number
     userId: number
@@ -4634,11 +4652,23 @@ export namespace Prisma {
   }
 
 
+  export type StickyNotesAvgAggregateInputType = {
+    x?: true
+    y?: true
+  }
+
+  export type StickyNotesSumAggregateInputType = {
+    x?: true
+    y?: true
+  }
+
   export type StickyNotesMinAggregateInputType = {
     id?: true
     title?: true
     content?: true
     color?: true
+    x?: true
+    y?: true
     pinned?: true
     archived?: true
     userId?: true
@@ -4651,6 +4681,8 @@ export namespace Prisma {
     title?: true
     content?: true
     color?: true
+    x?: true
+    y?: true
     pinned?: true
     archived?: true
     userId?: true
@@ -4663,6 +4695,8 @@ export namespace Prisma {
     title?: true
     content?: true
     color?: true
+    x?: true
+    y?: true
     pinned?: true
     archived?: true
     userId?: true
@@ -4709,6 +4743,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: StickyNotesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StickyNotesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: StickyNotesMinAggregateInputType
@@ -4739,6 +4785,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: StickyNotesCountAggregateInputType | true
+    _avg?: StickyNotesAvgAggregateInputType
+    _sum?: StickyNotesSumAggregateInputType
     _min?: StickyNotesMinAggregateInputType
     _max?: StickyNotesMaxAggregateInputType
   }
@@ -4748,12 +4796,16 @@ export namespace Prisma {
     title: string | null
     content: string | null
     color: string | null
+    x: number
+    y: number
     pinned: boolean
     archived: boolean
     userId: string
     createdAt: Date
     updatedAt: Date
     _count: StickyNotesCountAggregateOutputType | null
+    _avg: StickyNotesAvgAggregateOutputType | null
+    _sum: StickyNotesSumAggregateOutputType | null
     _min: StickyNotesMinAggregateOutputType | null
     _max: StickyNotesMaxAggregateOutputType | null
   }
@@ -4777,6 +4829,8 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     color?: boolean
+    x?: boolean
+    y?: boolean
     pinned?: boolean
     archived?: boolean
     userId?: boolean
@@ -4789,6 +4843,8 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     color?: boolean
+    x?: boolean
+    y?: boolean
     pinned?: boolean
     archived?: boolean
     userId?: boolean
@@ -4801,6 +4857,8 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     color?: boolean
+    x?: boolean
+    y?: boolean
     pinned?: boolean
     archived?: boolean
     userId?: boolean
@@ -4813,6 +4871,8 @@ export namespace Prisma {
     title?: boolean
     content?: boolean
     color?: boolean
+    x?: boolean
+    y?: boolean
     pinned?: boolean
     archived?: boolean
     userId?: boolean
@@ -4820,7 +4880,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type StickyNotesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "color" | "pinned" | "archived" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["stickyNotes"]>
+  export type StickyNotesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "color" | "x" | "y" | "pinned" | "archived" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["stickyNotes"]>
 
   export type $StickyNotesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "StickyNotes"
@@ -4830,6 +4890,8 @@ export namespace Prisma {
       title: string | null
       content: string | null
       color: string | null
+      x: number
+      y: number
       pinned: boolean
       archived: boolean
       userId: string
@@ -5262,6 +5324,8 @@ export namespace Prisma {
     readonly title: FieldRef<"StickyNotes", 'String'>
     readonly content: FieldRef<"StickyNotes", 'String'>
     readonly color: FieldRef<"StickyNotes", 'String'>
+    readonly x: FieldRef<"StickyNotes", 'Int'>
+    readonly y: FieldRef<"StickyNotes", 'Int'>
     readonly pinned: FieldRef<"StickyNotes", 'Boolean'>
     readonly archived: FieldRef<"StickyNotes", 'Boolean'>
     readonly userId: FieldRef<"StickyNotes", 'String'>
@@ -7845,6 +7909,8 @@ export namespace Prisma {
     title: 'title',
     content: 'content',
     color: 'color',
+    x: 'x',
+    y: 'y',
     pinned: 'pinned',
     archived: 'archived',
     userId: 'userId',
@@ -7954,6 +8020,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -8160,6 +8240,8 @@ export namespace Prisma {
     title?: StringNullableFilter<"StickyNotes"> | string | null
     content?: StringNullableFilter<"StickyNotes"> | string | null
     color?: StringNullableFilter<"StickyNotes"> | string | null
+    x?: IntFilter<"StickyNotes"> | number
+    y?: IntFilter<"StickyNotes"> | number
     pinned?: BoolFilter<"StickyNotes"> | boolean
     archived?: BoolFilter<"StickyNotes"> | boolean
     userId?: StringFilter<"StickyNotes"> | string
@@ -8172,6 +8254,8 @@ export namespace Prisma {
     title?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
     color?: SortOrderInput | SortOrder
+    x?: SortOrder
+    y?: SortOrder
     pinned?: SortOrder
     archived?: SortOrder
     userId?: SortOrder
@@ -8187,6 +8271,8 @@ export namespace Prisma {
     title?: StringNullableFilter<"StickyNotes"> | string | null
     content?: StringNullableFilter<"StickyNotes"> | string | null
     color?: StringNullableFilter<"StickyNotes"> | string | null
+    x?: IntFilter<"StickyNotes"> | number
+    y?: IntFilter<"StickyNotes"> | number
     pinned?: BoolFilter<"StickyNotes"> | boolean
     archived?: BoolFilter<"StickyNotes"> | boolean
     userId?: StringFilter<"StickyNotes"> | string
@@ -8199,14 +8285,18 @@ export namespace Prisma {
     title?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
     color?: SortOrderInput | SortOrder
+    x?: SortOrder
+    y?: SortOrder
     pinned?: SortOrder
     archived?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: StickyNotesCountOrderByAggregateInput
+    _avg?: StickyNotesAvgOrderByAggregateInput
     _max?: StickyNotesMaxOrderByAggregateInput
     _min?: StickyNotesMinOrderByAggregateInput
+    _sum?: StickyNotesSumOrderByAggregateInput
   }
 
   export type StickyNotesScalarWhereWithAggregatesInput = {
@@ -8217,6 +8307,8 @@ export namespace Prisma {
     title?: StringNullableWithAggregatesFilter<"StickyNotes"> | string | null
     content?: StringNullableWithAggregatesFilter<"StickyNotes"> | string | null
     color?: StringNullableWithAggregatesFilter<"StickyNotes"> | string | null
+    x?: IntWithAggregatesFilter<"StickyNotes"> | number
+    y?: IntWithAggregatesFilter<"StickyNotes"> | number
     pinned?: BoolWithAggregatesFilter<"StickyNotes"> | boolean
     archived?: BoolWithAggregatesFilter<"StickyNotes"> | boolean
     userId?: StringWithAggregatesFilter<"StickyNotes"> | string
@@ -8562,6 +8654,8 @@ export namespace Prisma {
     title?: string | null
     content?: string | null
     color?: string | null
+    x?: number
+    y?: number
     pinned?: boolean
     archived?: boolean
     userId: string
@@ -8574,6 +8668,8 @@ export namespace Prisma {
     title?: string | null
     content?: string | null
     color?: string | null
+    x?: number
+    y?: number
     pinned?: boolean
     archived?: boolean
     userId: string
@@ -8586,6 +8682,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    x?: IntFieldUpdateOperationsInput | number
+    y?: IntFieldUpdateOperationsInput | number
     pinned?: BoolFieldUpdateOperationsInput | boolean
     archived?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
@@ -8598,6 +8696,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    x?: IntFieldUpdateOperationsInput | number
+    y?: IntFieldUpdateOperationsInput | number
     pinned?: BoolFieldUpdateOperationsInput | boolean
     archived?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
@@ -8610,6 +8710,8 @@ export namespace Prisma {
     title?: string | null
     content?: string | null
     color?: string | null
+    x?: number
+    y?: number
     pinned?: boolean
     archived?: boolean
     userId: string
@@ -8622,6 +8724,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    x?: IntFieldUpdateOperationsInput | number
+    y?: IntFieldUpdateOperationsInput | number
     pinned?: BoolFieldUpdateOperationsInput | boolean
     archived?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
@@ -8634,6 +8738,8 @@ export namespace Prisma {
     title?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    x?: IntFieldUpdateOperationsInput | number
+    y?: IntFieldUpdateOperationsInput | number
     pinned?: BoolFieldUpdateOperationsInput | boolean
     archived?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
@@ -8984,11 +9090,24 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type StickyNotesCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
     color?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
     pinned?: SortOrder
     archived?: SortOrder
     userId?: SortOrder
@@ -8996,11 +9115,18 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type StickyNotesAvgOrderByAggregateInput = {
+    x?: SortOrder
+    y?: SortOrder
+  }
+
   export type StickyNotesMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
     color?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
     pinned?: SortOrder
     archived?: SortOrder
     userId?: SortOrder
@@ -9013,11 +9139,34 @@ export namespace Prisma {
     title?: SortOrder
     content?: SortOrder
     color?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
     pinned?: SortOrder
     archived?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type StickyNotesSumOrderByAggregateInput = {
+    x?: SortOrder
+    y?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type ToDoItemsListRelationFilter = {
@@ -9159,6 +9308,14 @@ export namespace Prisma {
     upsert?: BookmarksSectionsUpsertWithoutBookmarksInput
     connect?: BookmarksSectionsWhereUniqueInput
     update?: XOR<XOR<BookmarksSectionsUpdateToOneWithWhereWithoutBookmarksInput, BookmarksSectionsUpdateWithoutBookmarksInput>, BookmarksSectionsUncheckedUpdateWithoutBookmarksInput>
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type ToDoItemsCreateNestedManyWithoutListInput = {
@@ -9337,6 +9494,33 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type BookmarksCreateWithoutSectionInput = {

@@ -26,6 +26,7 @@ export default function SearchBar() {
         `https://www.google.com/search?q=${encodeURIComponent(searchText)}`,
         "_blank"
       );
+      setSearchText("");
     }
   };
 
@@ -38,14 +39,19 @@ export default function SearchBar() {
   return (
     <div className="flex-1 flex items-center gap-2">
       <FcGoogle size={40} />
-      <Input
-        ref={inputRef}
-        type="text"
-        placeholder="Search..."
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
+      <div className="w-full flex items-center gap-2 relative">
+        <Input
+          ref={inputRef}
+          type="text"
+          placeholder="Search..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <kbd className="absolute right-2 rounded border bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
+          Alt + S
+        </kbd>
+      </div>
       <Button onClick={handleSearch}>
         <SearchIcon />
         Search

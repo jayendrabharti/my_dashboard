@@ -5,13 +5,9 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  // DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import Link from "next/link";
 import SignOutButton from "./SignOutButton";
-import { Button } from "./ui/button";
-import { UserRoundCogIcon } from "lucide-react";
 import { useSession } from "@/providers/SessionProvider";
 
 interface UserButtonProps {
@@ -22,37 +18,31 @@ const UserButton: React.FC<UserButtonProps> = ({ className }) => {
   const { session } = useSession();
   const user = session?.user;
 
+  const initials = user?.user_metadata.name
+    .split(" ")
+    .map((name: string) => name.charAt(0).toUpperCase());
+
   if (session)
     return (
       <div className={cn("flex items-center", className)}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src={user?.user_metadata.image} />
-              <AvatarFallback>JB</AvatarFallback>
+              <AvatarImage src={user?.user_metadata.avatar_url} />
+              <AvatarFallback>{initials}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <div className="px-3 py-2">
               <span className="block font-medium text-sm text-gray-900 dark:text-gray-100">
-                {user?.user_metadata.full_name}
+                {user?.user_metadata.name}
               </span>
               <span className="block text-xs text-gray-500 dark:text-gray-400">
-                +{user?.phone}
-              </span>
-              <span className="block text-xs text-gray-500 dark:text-gray-400">
-                {user?.email || user?.user_metadata.email}
+                {user?.email}
               </span>
             </div>
             <DropdownMenuSeparator />
             <div className="flex flex-col gap-2 p-1">
-              <Button
-                variant={"outline"}
-                className="mx-auto w-full flex items-center justify-start"
-              >
-                <UserRoundCogIcon />
-                <Link href="/account_settings">Account Settings</Link>
-              </Button>
               <SignOutButton className="mx-auto w-full flex items-center justify-start" />
             </div>
           </DropdownMenuContent>

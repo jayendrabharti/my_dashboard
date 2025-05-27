@@ -28,7 +28,7 @@ export default function RootLayout({
                 <Header />
                 <NavBar />
               </header>
-              <div className="flex flex-col gap-2 items-center justify-center h-full w-full">
+              <div className="flex flex-col gap-2 items-center justify-center h-full w-full p-2 overflow-y-scroll">
                 {children}
               </div>
             </Main>

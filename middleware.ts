@@ -29,7 +29,7 @@ export const config = {
   ],
 };
 
-async function getUser(request: NextRequest, response: NextResponse) {
+export async function getUser(request: NextRequest, response: NextResponse) {
   const supabaseClient = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

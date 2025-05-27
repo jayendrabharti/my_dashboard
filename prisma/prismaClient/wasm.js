@@ -155,6 +155,8 @@ exports.Prisma.StickyNotesScalarFieldEnum = {
   title: 'title',
   content: 'content',
   color: 'color',
+  x: 'x',
+  y: 'y',
   pinned: 'pinned',
   archived: 'archived',
   userId: 'userId',

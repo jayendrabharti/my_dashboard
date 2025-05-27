@@ -2,10 +2,10 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
-import { Bookmark, HomeIcon, ListTodo, NotebookIcon } from "lucide-react";
+import { Bookmark, ListTodo, NotebookIcon } from "lucide-react";
 
 const Links = [
-  { name: "", href: "/", icon: HomeIcon },
+  // { name: "", href: "/", icon: HomeIcon },
   { name: "Bookmarks", href: "/bookmarks", icon: Bookmark },
   { name: "Notes", href: "/notes", icon: NotebookIcon },
   { name: "Tasks", href: "/tasks", icon: ListTodo },

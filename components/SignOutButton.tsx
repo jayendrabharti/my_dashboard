@@ -3,8 +3,9 @@ import { signOutAction } from "@/actions/auth";
 import { Loader2Icon, LogOutIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
+import { useSession } from "@/providers/SessionProvider";
 
 export default function SignOutButton({
   className = "",
@@ -13,13 +14,14 @@ export default function SignOutButton({
 }) {
   const router = useRouter();
   const [signingOut, startSignOut] = useTransition();
-
+  const { refreshSession } = useSession();
   return (
     <Button
       onClick={() => {
         startSignOut(async () => {
           await signOutAction();
-          router.push("/login");
+          refreshSession();
+          router.push("/");
         });
       }}
       disabled={signingOut}
