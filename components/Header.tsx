@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import SignInWithGoogle from "./SignInWithGoogle";
 import ThemeSwitch from "./ThemeSwitch";
@@ -9,10 +9,13 @@ import { createSupabaseClient } from "@/supabase/client";
 
 export default function Header() {
   const [user, setUser] = useState<User | null>(null);
+
   const { auth } = createSupabaseClient();
 
-  auth.onAuthStateChange((event, session) => {
-    setUser(session?.user || null);
+  useEffect(() => {
+    auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
   });
 
   return (

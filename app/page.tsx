@@ -1,8 +1,5 @@
-export default function Home() {
-  return (
-    <div>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
-    </div>
-  );
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  redirect("/bookmarks");
 }
