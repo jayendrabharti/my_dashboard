@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { useTransition } from "react";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
-import { useSession } from "@/providers/SessionProvider";
 
 export default function SignOutButton({
   className = "",
@@ -14,14 +13,12 @@ export default function SignOutButton({
 }) {
   const router = useRouter();
   const [signingOut, startSignOut] = useTransition();
-  const { refreshSession } = useSession();
   return (
     <Button
       onClick={() => {
         startSignOut(async () => {
           await signOutAction();
-          refreshSession();
-          router.push("/");
+          router.refresh();
         });
       }}
       disabled={signingOut}

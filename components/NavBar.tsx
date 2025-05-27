@@ -3,11 +3,8 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
 import { Bookmark, ListTodo, NotebookIcon } from "lucide-react";
-import { useEffect } from "react";
-import { useSession } from "@/providers/SessionProvider";
 
 const Links = [
-  // { name: "", href: "/", icon: HomeIcon },
   { name: "Bookmarks", href: "/bookmarks", icon: Bookmark },
   { name: "Notes", href: "/notes", icon: NotebookIcon },
   { name: "Tasks", href: "/tasks", icon: ListTodo },
@@ -15,14 +12,6 @@ const Links = [
 
 export default function NavBar() {
   const pathname = usePathname();
-  const { refreshSession } = useSession();
-
-  useEffect(() => {
-    async function fetchSession() {
-      await refreshSession();
-    }
-    fetchSession();
-  }, [pathname, refreshSession]);
 
   return (
     <nav className="bg-sidebar p-2 flex flex-row items-center justify-center gap-2">

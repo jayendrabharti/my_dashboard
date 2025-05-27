@@ -38,16 +38,6 @@ export default function NotesSheet({
   const [isPending, startTransition] = useTransition();
   const contentDiv = useRef<HTMLDivElement>(null);
 
-  // const setContent = async () => {
-  //   if (!contentDiv.current) return;
-  //   {
-  //     setUpdatedNote((prev) => ({
-  //       ...prev,
-  //       content: contentDiv.current ? contentDiv.current.innerHTML : "",
-  //     }));
-  //   }
-  // };
-
   const handleUpdatedNote = () => {
     startTransition(async () => {
       const { data, errorMessage } = await updateNoteAction({

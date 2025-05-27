@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import {
@@ -8,23 +8,27 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import SignOutButton from "./SignOutButton";
-import { useSession } from "@/providers/SessionProvider";
+import { User } from "@supabase/supabase-js";
 
-interface UserButtonProps {
-  className?: string;
-}
+export default function UserButton({ user }: { user: User }) {
+  // const supabase = createSupabaseClient();
+  // const [user, setUser] = useState<User | null>(null);
 
-const UserButton: React.FC<UserButtonProps> = ({ className }) => {
-  const { session } = useSession();
-  const user = session?.user;
+  // useEffect(() => {
+  //   const get = async () => {
+  //     const { data } = await supabase.auth.getUser();
+  //     setUser(data.user);
+  //   };
+  //   get();
+  // }, [supabase.auth]);
 
   const initials = user?.user_metadata.name
     .split(" ")
     .map((name: string) => name.charAt(0).toUpperCase());
 
-  if (session)
+  if (user)
     return (
-      <div className={cn("flex items-center", className)}>
+      <div className={cn("flex items-center")}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
@@ -49,6 +53,4 @@ const UserButton: React.FC<UserButtonProps> = ({ className }) => {
         </DropdownMenu>
       </div>
     );
-};
-
-export default UserButton;
+}
